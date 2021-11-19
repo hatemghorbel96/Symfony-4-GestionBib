@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Emprunteur{% endblock %}
+
+{% block body %}
+
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Numero de livre</th>
+                <th>Nom et prenom</th>
+<th>Nom du livre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for emprunteur in emprunteurs %}
+            <tr>
+
+                <td>{{ emprunteur.numero }} </td>
+
+                <td>{{ emprunteur.prenom }}  {{ emprunteur.nom }}</td>
+                <td>{{ emprunteur.livres.titre }}</td>
+                <td>
+                    <a href="{{ path('emprunteur_show', {'id': emprunteur.id}) }}"><span class="btn btn-default"><i class="fa fa-eye"></i></span></a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

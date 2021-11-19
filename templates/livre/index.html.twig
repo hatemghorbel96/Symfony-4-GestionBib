@@ -1,0 +1,44 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}
+
+
+{% endblock %}
+
+{% block body %}
+    <div class="bg-light p-3">
+        <h1><i class="fa fa-book"> Les livres</i></h1>
+    </div>
+    {% if is_granted('ROLE_EDITOR') %}
+        <a href="{{ path('livre_new') }}"><span class="btn btn-primary"><i class="fa fa-plus"></i> &nbsp; Nouveau</span></a>
+    {% endif %}
+
+    <div class="row">
+        {% for livre  in livres  %}
+            <div class="col-4 mt-4">
+                <div class="border border-dark rounded p-2 clearfix">
+                    <h2>
+                        {{ livre.titre  }}
+                        -
+                        {{ livre.prix }}
+                        DT
+                    </h2>
+                    <img src = "{{ asset('uploads/' ~ livre.image) }}" style = "width: 200px;height: 200px" alt="">
+                    <hr>
+                    <a href="{{ path('cart_add',{'id': livre.id})}}" class="btn btn-success float-right">
+                        <i class="fas fa-shopping-cart mr-1"></i>
+                        Ajouter
+                    </a>
+                    <a href="{{ path('livre_show', {'id': livre.id}) }}"><span class="btn btn-default"><i class="fa fa-eye"></i></span></a>
+                    {% if is_granted('ROLE_EDITOR') %}
+                        <a href="{{ path('livre_edit', {'id': livre.id}) }}"><span class="btn btn-default"><i class="fa fa-edit"></i></span></a>
+                        <a href="{{ path('livre_delete', {'id': livre.id}) }}"><span class="btn btn-default"><i class="fa fa-minus"></i></span></a>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+{% endblock %}

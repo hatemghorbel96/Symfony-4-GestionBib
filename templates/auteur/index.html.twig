@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Auteur index{% endblock %}
+{% block stylesheets %}
+
+    <link href="{{ asset('js/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block body %}
+    <h1><i class="fa fa-user"> Liste des auteurs</i></h1>
+<p></p>
+    <table class="table" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Bigraphie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for auteur in auteurs %}
+            <tr>
+                <td>{{ auteur.id }}</td>
+                <td>{{ auteur.prenom }}</td>
+                <td>{{ auteur.nom }}</td>
+                <td>{{ auteur.bigraphie }}</td>
+
+                <td>
+                    <a href="{{ path('auteur_show', {'id': auteur.id}) }}"><span class="btn btn-default"><i class="fa fa-eye"></i></span> </a>
+                    {% if is_granted('ROLE_EDITOR') %} <a href="{{ path('auteur_edit', {'id': auteur.id}) }}"><span class="btn btn-success"><i class="fa fa-pencil"></i></span> </a>
+                    <a href="{{ path('auteur_delete', {'id': auteur.id}) }}"><span class="btn btn-danger"><i class="fa fa-trash-o"></i></span> </a>
+
+                    {% endif %} </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_EDITOR') %}
+    <a href="{{ path('auteur_new') }}"><span class="btn btn-primary"><i class="fa fa-plus"></i> Nouveau</span></a>
+    {% endif %}
+{% endblock %}
+
+

@@ -1,0 +1,50 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Hello CartController!
+{% endblock %}
+
+{% block body %}
+    <div class="bg-light p-3">
+        <h1><i class="fa fa-shopping-cart"> Votre panier</i></h1>
+    </div>
+{% if items | length > 0 %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Livre</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.livre.titre }}</td>
+            <td>{{ item.livre.prix }} DT</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.livre.prix * item.quantity }}</td>
+            <td>
+            <a href="{{ path('cart_remove', {'id': item.livre.id})}}" class="btn btn-danger btn-sm">
+                <i class="fa fa-minus"></i>
+            </a>
+            </td>
+            <td></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3" class="text-right"> Total :</td>
+            <td>{{ total }} DT</td>
+            <td></td>
+        </tr>
+        </tfoot>
+    </table>
+    <a href="{{ path('livre_index') }}"><i class="fa fa-shopping-cart"></i> continuer mes achats</a>
+    {% else %}
+        <p>Panier est vide ajouter des livres !</p>
+    {% endif %}
+
+{% endblock %}

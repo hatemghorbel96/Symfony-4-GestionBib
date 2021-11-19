@@ -1,0 +1,47 @@
+<nav class="navbar-default navbar-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+            {% if app.user %}
+                <li>
+                    <a href="{{ path('livre_index') }}"><i class="fa fa-book"></i>Boutique du livre</a>
+
+                </li>
+            <li>
+                <a href="{{ path('auteur_index') }}"><i class="fa fa-user"></i> Auteurs</a>
+
+            </li>
+
+            <li>
+                <a href="{{ path('editeur_index') }}"><i class="fa fa-pencil"></i> Editeurs</a>
+
+            </li>
+
+            <li>
+                <a href="{{ path('categorie_index') }}"><i class="fa fa-folder"></i> Catégories</a>
+
+            </li>
+
+            {% if is_granted('ROLE_EDITOR') %}
+                <li>
+  <a href="{{ path('emprunteur_index') }}"><i class="fa fa-hand-o-right"></i> Empranteurs</a>
+
+                </li> {% endif %}
+               {#  <li>
+                    <a href="{{ path('emprunteur_index2', {'id': emprunteur.id}) }}"><i class="fa fa-print"></i> list</a>
+
+                </li>#}
+                <li>
+                    <a href="{{ path('emprunteur_new') }}"><i class="fa fa-print"></i> Empranter</a>
+
+                </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+            <li>
+                <a href="{{ path('admin_utilisateurs')}}" ><i class="fa fa-users"></i>Administration</a> </li>
+            {% endif %}
+        </ul>
+
+    </div>
+
+</nav>

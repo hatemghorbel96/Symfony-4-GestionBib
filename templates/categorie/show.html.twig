@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorie.id }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ categorie.designation }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ categorie.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('categorie_index') }}"><span class="btn btn-primary"><i class="fa fa-backward"></i>&nbsp;Retour</span></a>
+    {% if is_granted('ROLE_EDITOR') %}
+    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}"><span class="btn btn-success"><i class="fa fa-pencil"></i>&nbsp;Editer</span> </a>
+
+    {{ include('categorie/_delete_form.html.twig') }}{% endif %}
+{% endblock %}

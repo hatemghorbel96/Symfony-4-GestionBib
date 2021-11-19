@@ -1,0 +1,3 @@
+<?php //App%255CEntity%255CLivre%2523getNbexemplaire
+
+return [PHP_INT_MAX, []];
